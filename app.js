@@ -25,32 +25,23 @@ require('./asciify.js')
 // 3
 const getPokemon = async () => {
   try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon")
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
     let data = await response.json()
-    return data = await data
+    console.log(data);
+    let pokemonNames = []
+    for (let i = 0; i < 151; i ++) {
+      pokemonNames.push(data.results[i].name)
+    }
+      return pokemonNames
   } catch(err) {
     console.log(err)
   }
-  return data
 }
 
-  const pokemonArray = async (result) => {
-    let pokemonNames = []
-  for (let i = 1; i < 152; i ++) {
-      pokemonNames.push(result.result[i].name)
-      console.log(pokemonNames)
-    }
-    result = pokemonArray(result)
-    console.log(result);
-}
-
-// 2
 const app = async () => {
 
   const result = await getPokemon()
-  const result2 = await pokemonArray(result)
-
-  console.log(result2);
+  console.log(result)
 }
   app()
 
