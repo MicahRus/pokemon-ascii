@@ -1,0 +1,25 @@
+{
+  "name": "pair_program",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hexicans96/pokemon-ascii.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hexicans96/pokemon-ascii/issues"
+  },
+  "homepage": "https://github.com/Hexicans96/pokemon-ascii#readme",
+  "dependencies": {
+    "asciify-image": "^0.1.6",
+    "node-fetch": "^2.6.0",
+    "readline-sync": "^1.4.10"
+  }
+}
