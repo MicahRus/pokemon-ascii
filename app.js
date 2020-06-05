@@ -2,49 +2,85 @@ const asciify = require('asciify-image');
 const readlineSync = require('readline-sync');
 const fetch = require('node-fetch');
 require('./asciify.js')
+const run = true
+let userInput = -1
+let pokemonNames = []
 
-
-// 3
 const getPokemon = async () => {
   try {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+    if (!response.ok) {
+      throw new Error("Pokemon API is down. :C")
+    }
+
     let data = await response.json()
-    let pokemonNames = []
-    for (let i = 0; i < 151; i ++) {
+    if (pokemonNames.length === 0){
+      for (let i = 0; i < 151; i ++) {
       pokemonNames.push(data.results[i].name)
     }
+  }
       return pokemonNames
   } catch(err) {
     console.log(err)
   }
 }
-const pokemonMenu = async () => {
-menu = ['View List', 'Asciify Pokemon', 'Giraffe'],
-index = readlineSync.keyInSelect(menu, 'Which option?');
-  console.log(menu);
 
+const mainMenu = (result) => {
+  console.log("What would you like to do friend :)");
+  menu = ['View Pokemon List', 'Asciify a Pokemon', 'Giraffe', 'Exit'],
+  index = readlineSync.keyInSelect(menu, 'Which option?');
+  console.log(menu);
 switch (index + 1) {
-    case 1 :
-      pokemonMenu = await [pokemonNames],
-      index = readlineSync.keyInSelect(pokemonMenu, 'Which pokemon would you like to asciify?');
-      break;
-    case 2 :
-      console.log('asdfafdsa');
-      break;
-    case 3 : 
-      // asciify giraffe
-      break;
+  case 1 :
+    for (let z = 0; z < result.length; z ++) {
+      console.log(`[${z}] ${result[z]}`);
+    }
+    break;
+  case 2 :
+    console.log('Which Pokemon would you like to Asciify?')
+    userInput = readlineSync.question('>');
+    break;
+  case 3 : 
+    // asciify giraffe
+    break;
+  case 4 :
+    console.log("Thanks for using Pokemon Asciify!")
+    process.exit()
+    break;
   }
 }
-
 const app = async () => {
+  // 3
 
   const result = await getPokemon()
-  const result2 = await pokemonMenu()
-  console.log(result)
+  const result2 = await mainMenu(result)
+  
+  const options = {
+    fit:    'box',
+    width:  100,
+    height: 100
+  }
+  
+  if(userInput >= 0 && userInput <= 151) {
+  const image = asciify(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${userInput}.png`, options, function (err, asciified) {
+    if (err) throw err;
+    
+    // Print to console
+    console.log(asciified);
+  });
 }
-  app()
+  const keepRunning = () => {
+    if(run === true) {
+      userInput = -1
+      app()
+    }
+    run === true
+  }
+  keepRunning()
+}
 
+
+app()
 
 // let result = getPokemon()
 //   .then((data) => console.log(data))
@@ -87,4 +123,3 @@ const app = async () => {
   //   case 1
   //   pokemonList = []
   // } 
-
