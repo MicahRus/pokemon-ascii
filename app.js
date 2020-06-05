@@ -6,7 +6,7 @@ const run = true
 let userInput = -1
 let pokemonNames = []
 
-  const options = {
+  let options = {
     fit:    'box',
     width:  50,
     height: 50
@@ -67,7 +67,11 @@ const app = async () => {
   const result = await getPokemon()
   const result2 = await mainMenu(result)
   
-
+options = {
+    fit:    'box',
+    width:  100,
+    height: 100
+  }
   
   if(userInput >= 0 && userInput <= 151) {
   const image = asciify(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${userInput}.png`, options, function (err, asciified) {
