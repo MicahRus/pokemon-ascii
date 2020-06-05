@@ -37,9 +37,20 @@ const getPokemon = async () => {
   }
 }
 
+const pokemonSlideShow = () => {
+  for (let userInput = 0; userInput <= 151; userInput ++) {
+      const image = asciify(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${userInput}.png`, options, function (err, asciified) {
+    if (err) throw err;
+    
+    // Print to console
+     setTimeout(() => {console.log(asciified)}, 500);
+    });
+  }
+}
+
 const mainMenu = (result) => {
   console.log("What would you like to do friend :)");
-  menu = ['View Pokemon List', 'Asciify a Pokemon', 'Giraffe', 'Exit'],
+  menu = ['View Pokemon List', 'Asciify a Pokemon', 'Slideshow', 'Exit'],
   index = readlineSync.keyInSelect(menu, 'Which option?');
   console.log(menu);
 switch (index + 1) {
@@ -53,7 +64,7 @@ switch (index + 1) {
     userInput = readlineSync.question('>');
     break;
   case 3 : 
-    // asciify giraffe
+    pokemonSlideShow()
     break;
   case 4 :
     console.log("Thanks for using Pokemon Asciify!")
@@ -69,8 +80,8 @@ const app = async () => {
   
 options = {
     fit:    'box',
-    width:  100,
-    height: 100
+    width:  80,
+    height: 80
   }
   
   if(userInput >= 0 && userInput <= 151) {
