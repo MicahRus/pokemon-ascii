@@ -4,30 +4,11 @@ const fetch = require('node-fetch');
 require('./asciify.js')
 
 
-// menu = ['View List', 'Asciify Pokemon', 'Giraffe'],
-// index = readlineSync.keyInSelect(menu, 'Which option?');
-//   console.log(menu);
-
-//   switch (index + 1) {
-//     case 1 :
-//       pokemonMenu = [allPokemon],
-//       index = readlineSync.keyInSelect(pokemonMenu, 'Which pokemon would you like to asciify?');
-//       break;
-//     case 2 :
-//       console.log('asdfafdsa');
-//       break;
-//     case 3 : 
-//       // asciify giraffe
-//       break;
-//   }
-
-
 // 3
 const getPokemon = async () => {
   try {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
     let data = await response.json()
-    console.log(data);
     let pokemonNames = []
     for (let i = 0; i < 151; i ++) {
       pokemonNames.push(data.results[i].name)
@@ -37,10 +18,29 @@ const getPokemon = async () => {
     console.log(err)
   }
 }
+const pokemonMenu = async () => {
+menu = ['View List', 'Asciify Pokemon', 'Giraffe'],
+index = readlineSync.keyInSelect(menu, 'Which option?');
+  console.log(menu);
+
+  switch (index + 1) {
+    case 1 :
+      pokemonMenu = [pokemonNames],
+      index = readlineSync.keyInSelect(pokemonMenu, 'Which pokemon would you like to asciify?');
+      break;
+    case 2 :
+      console.log('asdfafdsa');
+      break;
+    case 3 : 
+      // asciify giraffe
+      break;
+  }
+}
 
 const app = async () => {
 
   const result = await getPokemon()
+  const result2 = await pokemonMenu()
   console.log(result)
 }
   app()
