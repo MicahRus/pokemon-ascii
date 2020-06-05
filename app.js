@@ -23,9 +23,9 @@ menu = ['View List', 'Asciify Pokemon', 'Giraffe'],
 index = readlineSync.keyInSelect(menu, 'Which option?');
   console.log(menu);
 
-  switch (index + 1) {
+switch (index + 1) {
     case 1 :
-      pokemonMenu = [pokemonNames],
+      pokemonMenu = await [pokemonNames],
       index = readlineSync.keyInSelect(pokemonMenu, 'Which pokemon would you like to asciify?');
       break;
     case 2 :
