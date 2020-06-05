@@ -1,41 +1,90 @@
 const asciify = require('asciify-image');
-const readline = require('readline-sync');
+const readlineSync = require('readline-sync');
 const fetch = require('node-fetch');
+require('./asciify.js')
 
-  menu = ['View list', 'Search', 'Giraffe'],
-  userInput = readline.keyInSelect(menu, 'Which pokemon?');
 
-const getPokemon = () => {
-fetch(`https://pokeapi.co/api/v2/pokemon`)
-  .then(response => response.json())
-  .then(allPokemon => console.log(allPokemon.sprites.front_default));
-}
-
-getPokemon()
-
-  const pokemonNames = () => {
-    fetch('')
+// 3
+const getPokemon = async () => {
+  try {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+    let data = await response.json()
+    let pokemonNames = []
+    for (let i = 0; i < 151; i ++) {
+      pokemonNames.push(data.results[i].name)
+    }
+      return pokemonNames
+  } catch(err) {
+    console.log(err)
   }
+}
+const pokemonMenu = async () => {
+menu = ['View List', 'Asciify Pokemon', 'Giraffe'],
+index = readlineSync.keyInSelect(menu, 'Which option?');
+  console.log(menu);
 
-  switch (userInput) {
-    case 1
-    pokemonList = []
-  } 
-
-
-const options = {
-  fit:    'box',
-  width:  100,
-  height: 100
+  switch (index + 1) {
+    case 1 :
+      pokemonMenu = [pokemonNames],
+      index = readlineSync.keyInSelect(pokemonMenu, 'Which pokemon would you like to asciify?');
+      break;
+    case 2 :
+      console.log('asdfafdsa');
+      break;
+    case 3 : 
+      // asciify giraffe
+      break;
+  }
 }
 
-const image = asciify(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${userInput}.png`, options, function (err, asciified) {
-  if (err) throw err;
- 
-  // Print to console
-  console.log(asciified);
-});
+const app = async () => {
 
-console.log(image);
+  const result = await getPokemon()
+  const result2 = await pokemonMenu()
+  console.log(result)
+}
+  app()
 
+
+// let result = getPokemon()
+//   .then((data) => console.log(data))
+
+  // console.log(result);
+
+// 1
+
+
+
+// const getPokemon = async () => {
+//   const response = await fetch(`https://pokeapi.co/api/v2/pokemon`)
+//   const data = await response.json()
+//    console.log(data);
+// }
+
+
+// const getPokemon = async () => {
+//   const data = []
+// fetch(`https://pokeapi.co/api/v2/pokemon`)
+//   .then(response => response.json())
+//   .then(allPokemon => console.log(data.push(allPokemon))
+//   )}
+
+
+
+
+// pokemonArray()
+// console.log(data);
+
+
+
+
+// Menu
+  // const pokemonNames = () => {
+    
+  // }
+
+  // switch (userInput) {
+  //   case 1
+  //   pokemonList = []
+  // } 
 
